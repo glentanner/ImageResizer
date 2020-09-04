@@ -21,7 +21,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javax.imageio.ImageIO;
 
 /**
  *
@@ -126,7 +125,7 @@ public class ImageResizer extends Application {
             
             Platform.runLater(() -> {
                 System.out.println("File location: " + file.getAbsolutePath());
-                System.out.println("File size: " + (file.length()/1000) + " KB");
+                System.out.println("File size: " + file.length());
                 
                 try {
                     if(!contentPane.getChildren().isEmpty()) {
@@ -147,7 +146,7 @@ public class ImageResizer extends Application {
                     //  ImageIO.write(bufferedImage, "png", newFile);
                     // Add the image
                     //addImage(resizedImage);
-                    System.out.println("File size: " + (file.length()/1000) + " KB");
+                    System.out.println("File size: " + (file.length()));
                 } catch(FileNotFoundException fnf) {
                     Logger.getLogger(ImageResizer.class.getName()).log(Level.SEVERE, null, fnf);
                 }
