@@ -1,5 +1,7 @@
 /*
- * U.S. Fish and Wildlife Service
+* Copyright Glen Tanner. All rights reserved.
+* 
+* SPDX-License_Identifier: LGPL-3.0
  */
 package imageresizer;
 

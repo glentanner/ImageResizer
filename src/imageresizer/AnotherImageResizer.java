@@ -1,5 +1,7 @@
 /*
- * U.S. Fish and Wildlife Service
+* Copyright Glen Tanner. All rights reserved.
+* 
+* SPDX-License_Identifier: LGPL-3.0
  */
 package imageresizer;
 
@@ -21,11 +23,12 @@ public class AnotherImageResizer {
         File plainFile50 = new File("C:\\Users\\gtanner\\Desktop\\images\\planetPlain50.jpg");
         File plainFile25 = new File("C:\\Users\\gtanner\\Desktop\\images\\planetPlain25.jpg");
         File plainFile2x = new File("C:\\Users\\gtanner\\Desktop\\images\\planetPlain2x.jpg");
+        File plainFile4x = new File("C:\\Users\\gtanner\\Desktop\\images\\planetPlain4x.jpg");
         
-        File hintedFile = new File("C:\\Users\\gtanner\\Desktop\\images\\planetHinted.jpg");
         double percent_50 = 0.5;
         double percent_25 = 0.25;
         double percent_200 = 2;
+        double percent_400 = 4;
         
         BufferedImage originalImage = ImageIO.read(originalFile);
         int type = originalImage.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : originalImage.getType();
@@ -49,6 +52,12 @@ public class AnotherImageResizer {
         ImageIO.write(resizeImageBmp, "jpg", plainFile2x);
         
         printDimensionsAndFileSize(resizeImageBmp, plainFile2x);
+        
+        // 4X
+        resizeImageBmp = resizeImage(originalImage, type, percent_400);
+        ImageIO.write(resizeImageBmp, "jpg", plainFile4x);
+        
+        printDimensionsAndFileSize(resizeImageBmp, plainFile4x);
         
 //        resizeImageBmp = resizeImageWithHint(originalImage, type);
 //        ImageIO.write(resizeImageBmp, "jpg", hintedFile);
