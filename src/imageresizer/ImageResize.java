@@ -17,7 +17,7 @@ import javax.imageio.ImageIO;
  * 1) Change the format to use a higher compression.
  * 2) Change the image size, preserving the aspect ratio.
  * 
- * For instance, assume we have a Getac V110 with an 10MP camera (it is probably 8MP).
+ * For instance, assume we have an 10MP camera.
  * Compression options for a 10MP image are basic, normal, and fine.
  * File sizes range from basic(1.3 MB), normal(2.4MB), and fine(4.7MB).
  * 
@@ -35,19 +35,29 @@ import javax.imageio.ImageIO;
 public class ImageResize {
     
     public static void main(String[] args) {
-        // Read in an image, print the path, width, height.
+        // New file to store the new scaled image
+        File scaledMallard = new File("C:\\Users\\gtanner\\Desktop\\images\\scaledMallard.jpg");
+        File scaledPercentMallard = new File("C:\\Users\\gtanner\\Desktop\\images\\scaledPercentMallard.jpg");
+
         try {
-            readFromFile(new File("src\\imageresizer\\frog.jpg"));
+            // Read the image
+            BufferedImage testImage = readFromFile(new File("src\\imageresizer\\mallard.jpg"));
+            
+            // Scale the image down using a fixed size
+            BufferedImage scaledImage = getScaledImage(testImage, 800, 600);
+            // Write the buffered image (scaledImage) to a new file (scaledMallard.jpg)
+            ImageIO.write(scaledImage, "jpg", scaledMallard);
+            printDimensionsAndFileSize(scaledImage, scaledMallard);
+            
+            // Scale the image down using a fixed size
+            BufferedImage scaledPercentImage = getScaledImageByPercent(testImage, .5);
+            // Write the buffered image (scaledImage) to a new file (scaledMallard.jpg)
+            ImageIO.write(scaledPercentImage, "jpg", scaledPercentMallard);
+            printDimensionsAndFileSize(scaledPercentImage, scaledPercentMallard);
         } catch(IOException ioe) {
             ioe.getMessage();
-        }
-        
-        // Resize it to a max file size.
-        
+        }     
     }
-    
-    // Resize it to a max file size.
-    // Print the size of the file.
     
     // Returns a BufferedImage from a File
     private static BufferedImage readFromFile(File filename) throws IOException {
@@ -57,26 +67,22 @@ public class ImageResize {
         
         return originalImage;
     }
-//        System.out.println("Path: " + originalFile.getAbsolutePath());
-//        printDimensionsAndFileSize(originalImage, originalFile);
-//        
-//        int type = originalImage.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : originalImage.getType();
-//        
-//        printDimensionsAndFileSize(originalImage, originalFile);
-        
-        // 50%
-        //BufferedImage resizeImageBmp = resizeImage(originalImage, type, percent_50);
-        //ImageIO.write(resizeImageBmp, "jpg", plainFile50);
     
-    // For debugging: prints width, height of a BufferedImage and file size 
-    private static void printDimensionsAndFileSize(BufferedImage image, File file) {
-        // Write the pixel properties
-        System.out.println("Image width: " + image.getWidth());
-        System.out.println("Image height: " + image.getHeight());
-        System.out.println("File size: " + file.length()/1024 + "KB");
+    private static BufferedImage getScaledImageByPercent(BufferedImage originalImage, double percent) {
+        int IMG_WIDTH = (int)(originalImage.getWidth() * percent);
+        int IMG_HEIGHT = (int)(originalImage.getHeight() * percent);
+        
+        // Preserve type if we can
+        int type = originalImage.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : originalImage.getType();
+        BufferedImage resizedImage = new BufferedImage(IMG_WIDTH, IMG_HEIGHT, type);
+        Graphics2D g = resizedImage.createGraphics();
+        g.drawImage(originalImage, 0, 0, IMG_WIDTH, IMG_HEIGHT, null);
+        g.dispose();
+        
+        return resizedImage;
     }
     
-    private BufferedImage getScaledImage(BufferedImage src, int w, int h){
+    private static BufferedImage getScaledImage(BufferedImage src, int w, int h){
         int original_width = src.getWidth();
         int original_height = src.getHeight();
         int bound_width = w;
@@ -100,12 +106,25 @@ public class ImageResize {
             new_width = (new_height * original_width) / original_height;
         }
 
-        BufferedImage resizedImg = new BufferedImage(new_width, new_height, BufferedImage.TYPE_INT_RGB);
+        // Preserve the type if we can
+        int type = src.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : src.getType();
+        
+        BufferedImage resizedImg = new BufferedImage(new_width, new_height,type);
+        
         Graphics2D g2 = resizedImg.createGraphics();
         g2.setBackground(Color.WHITE);
         g2.clearRect(0,0,new_width, new_height);
         g2.drawImage(src, 0, 0, new_width, new_height, null);
         g2.dispose();
         return resizedImg;
+    }
+    
+    // For debugging: prints width, height of a BufferedImage and file size 
+    private static void printDimensionsAndFileSize(BufferedImage image, File file) {
+        // Write the pixel properties
+        System.out.println("Image width: " + image.getWidth());
+        System.out.println("Image height: " + image.getHeight());
+        System.out.println("Image values: "+ image.toString());
+        System.out.println("File size: " + file.length()/1024 + "KB");
     }
 }
