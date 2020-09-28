@@ -13,22 +13,32 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 /**
- * To reduce the file size of an image, we have two options (for JPEG/JPG):
- * 1) Change the format to use a higher compression.
- * 2) Change the image size, preserving the aspect ratio.
+ * The file size for images is determined by image resolution and bit depth.
+ *  file size = resolution * bit depth
+ * Bit Depth is the number of colors an image can store.
+ * A typical JPEG displayed on computers and phones has a 24 bit depth (16 million colors).
  * 
- * For instance, assume we have an 10MP camera.
- * Compression options for a 10MP image are basic, normal, and fine.
- * File sizes range from basic(1.3 MB), normal(2.4MB), and fine(4.7MB).
+ * When a JPEG is compressed, bit depth is reduced. It follows that file size
+ * can be reduced by reducing bit depth (i.e. the number of colors).
  * 
- * An 8MP(8 million pixels) image typically is 3264 x 2448
- * 2MP = 1632 x 1224
- * 500KB = 816 x 612
- * 250KB = 600 x 400
+ * Resolution is the number of pixels in an image (width * height)
+ * Since 1 byte = 8 bits
+ * If bit depth = 24:
+ * Image file size(bits) = (resolution) * (bit depth) = resolution * 24
+ * Image file size(bytes) = (resolution) * (bit depth / 8) = resolution * 3
  * 
- * To fit two images per row in an A4 document like a standard .docx,
- * a 500KB image should be 816 x 612 max, and
- * a 250KB image should be 612 x 408 max.
+ * Image file size(kilobytes) = resolution * 3/1024
+ * Image file size(megabytes) = resolution * 3/1024*1024
+ * 
+ * 
+ * (Number of pixels)*(bit depth) / 8 = number of bytes
+ * (Number of pixels)*(bit depth) / 1024 = number of kilobytes
+ * (Number of pixels)*(bit depth) / (1024*1024) = number of megabytes
+ * 
+ * If we want to insert one row of two images side-by-side into a Word document,
+ * the max width of each image should be 235 pixels. Assuming a 4:3 aspect ratio,
+ * as is the size of most images taken with a Getac V110 rear camera,
+ * the image would be 235x176.25, or about 41418.75 pixels (122KB). 
  * 
  * @author gtanner
  */
@@ -41,7 +51,11 @@ public class ImageResize {
 
         try {
             // Read the image
-            BufferedImage testImage = readFromFile(new File("src\\imageresizer\\mallard.jpg"));
+            File imageFile = new File("src\\imageresizer\\mallard.jpg");
+            BufferedImage testImage = readFromFile(imageFile);
+            
+            // Get the file size in KB
+            System.out.println("Original File size: " + imageFile.length()/1024);
             
             // Scale the image down using a fixed size
             BufferedImage scaledImage = getScaledImage(testImage, 800, 600);
