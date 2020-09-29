@@ -13,7 +13,8 @@ import java.io.File;
 import javax.imageio.ImageIO;
 
 /**
- *
+ * Resizes image by percent, also with hints.
+ * 
  * @author gtanner
  */
 public class ImageResize3 {

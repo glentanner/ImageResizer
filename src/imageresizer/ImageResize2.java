@@ -25,7 +25,8 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 /**
- *
+ * Creates a window to allow user to drag and drop an image to be resized
+ * 
  * @author gtanner
  */
 public class ImageResize2 extends Application {

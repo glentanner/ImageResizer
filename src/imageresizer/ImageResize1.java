@@ -13,6 +13,8 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 /**
+ * This class scales images by percent.
+ * 
  * The file size for images is determined by image resolution and bit depth.
  *  file size = resolution * bit depth
  * Bit Depth is the number of colors an image can store.

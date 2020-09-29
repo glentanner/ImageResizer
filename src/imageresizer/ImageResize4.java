@@ -41,6 +41,8 @@ import javax.imageio.ImageIO;
 
 
 /**
+ * Allows user to crop an image for resizing.
+ * 
  * Load image, provide rectangle for rubberband selection. 
  * Press right mouse button for "crop" context menu which then crops the image 
  * at the selection rectangle and saves it as jpg.
