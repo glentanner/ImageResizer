@@ -45,7 +45,7 @@ import javax.imageio.ImageIO;
  * Press right mouse button for "crop" context menu which then crops the image 
  * at the selection rectangle and saves it as jpg.
  */
-public class ImageCropWithRubberBand extends Application {
+public class ImageResize4 extends Application {
 
     RubberBandSelection rubberBandSelection;
     ImageView imageView;
@@ -78,7 +78,7 @@ public class ImageCropWithRubberBand extends Application {
             // the container for the image as a javafx node
             imageView = new ImageView( image);
         } catch(FileNotFoundException fnf) {
-                    Logger.getLogger(ImageResizer.class.getName()).log(Level.SEVERE, null, fnf);
+                    Logger.getLogger(ImageResize2.class.getName()).log(Level.SEVERE, null, fnf);
         }
         
         // add image to layer

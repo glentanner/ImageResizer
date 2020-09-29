@@ -42,7 +42,7 @@ import javax.imageio.ImageIO;
  * 
  * @author gtanner
  */
-public class ImageResize {
+public class ImageResize1 {
     
     public static void main(String[] args) {
         // New file to store the new scaled image

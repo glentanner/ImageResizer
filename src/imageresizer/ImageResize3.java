@@ -16,7 +16,7 @@ import javax.imageio.ImageIO;
  *
  * @author gtanner
  */
-public class AnotherImageResizer {
+public class ImageResize3 {
     
     public static void main(String[] args) throws Exception {
         File originalFile = new File("C:\\Users\\gtanner\\Desktop\\images\\planet.jpg");
