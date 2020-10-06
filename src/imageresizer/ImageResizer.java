@@ -41,7 +41,7 @@ public class ImageResizer {
      */
     public File resizeImage(File imageFile, int width) throws IOException {
         Image img = ImageIO.read(imageFile);
-        BufferedImage newJpg = resizeImage(img, width);
+        //BufferedImage newJpg = resizeImage(img, width);
         
         return null;
     }

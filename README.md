@@ -27,6 +27,5 @@ Allows the user to draw a rectangle and crop an image like in Paint. Right click
 Show different ways to read in an image file.
 Read image from File
 Read image from URL
-Read image from classpath
 Read image from FileInputStream
 

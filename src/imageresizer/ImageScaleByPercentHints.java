@@ -17,7 +17,7 @@ import javax.imageio.ImageIO;
  * 
  * @author gtanner
  */
-public class ImageResize3 {
+public class ImageScaleByPercentHints {
     
     public static void main(String[] args) throws Exception {
         File originalFile = new File("C:\\Users\\gtanner\\Desktop\\images\\planet.jpg");

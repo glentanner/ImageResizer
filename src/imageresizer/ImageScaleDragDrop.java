@@ -29,7 +29,7 @@ import javafx.stage.Stage;
  * 
  * @author gtanner
  */
-public class ImageResize2 extends Application {
+public class ImageScaleDragDrop extends Application {
     
     ImageView imageView;
     StackPane contentPane;
@@ -85,7 +85,7 @@ public class ImageResize2 extends Application {
             // Get the pixel reader from the image
             reader = image.getPixelReader();
         } catch (NullPointerException npe) {
-            Logger.getLogger(ImageResize2.class.getName()).log(Level.SEVERE, null, npe);
+            Logger.getLogger(ImageScaleDragDrop.class.getName()).log(Level.SEVERE, null, npe);
         }
         
         // Get Image properties
@@ -151,7 +151,7 @@ public class ImageResize2 extends Application {
                     //addImage(resizedImage);
                     System.out.println("File size: " + (file.length()));
                 } catch(FileNotFoundException fnf) {
-                    Logger.getLogger(ImageResize2.class.getName()).log(Level.SEVERE, null, fnf);
+                    Logger.getLogger(ImageScaleDragDrop.class.getName()).log(Level.SEVERE, null, fnf);
                 }
             });
         }

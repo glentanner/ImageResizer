@@ -44,7 +44,7 @@ import javax.imageio.ImageIO;
  * 
  * @author gtanner
  */
-public class ImageResize1 {
+public class ImageScaleByPercent {
     
     public static void main(String[] args) {
         // New file to store the new scaled image
